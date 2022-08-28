@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cart item</title>
+</head>
+<style>
+
+nav{
+        width: 100%;
+        height: 10vh;
+        border: 1px solid black;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        left: 0;
+        background-color: white;
+    }
+    .mainn{
+        width:100%;
+        height: fit-content;
+        /* border: 1px solid black; */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content:flex-start;
+        
+
+    }
+    .card {
+        width: 20%;
+        height: 47vh;
+        border: 1px solid blue;
+        margin-top: 1%;
+        border-radius: 10px;
+        margin-left: 2%;
+
+    }
+    .img_div{
+        width: 100%;
+        height: 30vh;
+        border-radius: 10px;
+
+    }
+    .immage{
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+
+    }
+    .Add{
+        width: 95%;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: transparent;
+        border-radius: 15px;
+        box-shadow: 3px 3px 4px gray;
+        color: blue;
+        font-size: 15px;
+        margin-top: 1%;
+
+
+
+    }
+    .item-name{
+        font-size: 15px;
+        font-family: monospace;
+        font-style: italic ;
+        color: blue;
+        text-align: center;
+        font-weight: 600;
+        margin-top: 1%;
+
+    }
+    .item-price{
+        font-size: 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 700;
+        color: black;
+        text-align: center;
+    }
+    .item-cat{
+        font-size: 12px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 400;
+        color: black;
+        text-align: center;
+    }
+    .cartng{
+        font-size: 35px;
+        font-family: sans-serif;
+        font-weight: 900;
+        font-style: italic;
+        color: blue;
+    }
+    .secotr{
+        font-size: 20px;
+        font-family: sans-serif;
+        font-weight: 500;
+        font-style: italic;
+        color: blue;
+    }
+    .home{
+        font-size: 25px;
+        font-weight: 800;
+        color: blue;
+
+    }
+    a{
+        text-decoration: none;
+    }
+</style>
+<body>
+    <nav>
+        <a href="index.html"><div class="home">HOME</div></a>
+        <div class="cartng">CART.NG</div> 
+        <div class="secotr">You have <span class="prestitem">0</span> items in the Cart </div>
+    </nav>
+    <section>
+        <div  class="mainn"></div>
+    </section>
+</body>
+</html>
+<script>
+    let cartItem = JSON.parse(localStorage.getItem('cartitem'))
+    let board = document.querySelector('.mainn');
+    let present = document.querySelector('.prestitem');
+     
+    //  console.log(cartItem);
+
+     function showitem() {
+        for (let index = 0; index < cartItem.length; index++) {
+            const element = cartItem[index];
+
+            // console.log(element);
+
+            board.innerHTML += ` <div id="${element.id}"  class="card">            
+                                <div class="img_div" id="${element.id}" ><img class="immage" src="${element.image}"></div>              
+                                <div class="item-name">${element.title}</div>
+                                <div class="item-price"> #${element.price}</div>
+                                <div class="item-cat">Category:${element.category}</div>
+                                <button class="Add"onclick="removeCart(${index})">REMOVE ITEM </button>
+                            
+                            </div>
+          `
+            
+        }
+
+        present.innerHTML = cartItem.length
+
+        
+     }
+     showitem()
+
+
+     function removeCart(index) {
+
+        cartItem.splice(index,1);
+
+        localStorage.setItem('cartitem', JSON.stringify(cartItem))
+ 
+        window.location.reload();
+     }
+
+
+</script>
+ 
